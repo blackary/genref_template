@@ -194,6 +194,12 @@ body {
     }
 }
 
+@media (max-width: 600px) {
+    .site-logo {
+        display: none;
+    }
+}
+
 
 /* 5. Site Navigation
 /* ---------------------------------------------------------- */
