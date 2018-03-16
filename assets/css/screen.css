@@ -1935,3 +1935,8 @@ Usage (In Ghost editor):
 #site-search {
     text-align: center;
 }
+
+.search-page .post-full-header {
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
