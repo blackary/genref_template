@@ -1,8 +1,8 @@
 {
-    "name": "genref_casper",
+    "name": "genref-casper",
     "description": "The default personal blogging theme for Ghost. Beautiful, minimal and responsive.",
     "demo": "https://demo.ghost.io",
-    "version": "2.1.10",
+    "version": "2.1.11",
     "engines": {
         "ghost": ">=1.2.0"
     },

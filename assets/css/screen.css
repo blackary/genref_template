@@ -1931,3 +1931,7 @@ Usage (In Ghost editor):
         margin-left: 0;
     }
 }
+
+#site-search {
+    text-align: center;
+}

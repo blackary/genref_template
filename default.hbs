@@ -17,6 +17,8 @@
     {{!-- This tag outputs SEO meta+structured data and other important settings --}}
     {{ghost_head}}
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 </head>
 <body class="{{body_class}}">
 
@@ -56,11 +58,8 @@
     {{/if}}
 
     {{!-- jQuery + Fitvids, which makes all video embeds responsive --}}
-    <script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous">
-    </script>
+    <script type="text/javascript" src="{{asset "js/typeahead.bundle.min.js"}}"></script>
+    <script type="text/javascript" src="{{asset "js/typeahead.jquery.min.js"}}"></script>
     <script type="text/javascript" src="{{asset "js/jquery.fitvids.js"}}"></script>
 
     {{#if pagination.pages}}

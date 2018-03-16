@@ -1,0 +1,78 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- The big featured header, it uses blog cover image as a BG if available --}}
+<header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+</header>
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <header class="post-full-header">
+        </header>
+        <article class="post-full no-image">
+            <div id="site-search" style="display:none;"> <!--Hide this until getting data is successful-->
+                <input class="typeahead" type="text" placeholder="Search">
+            </div>
+            <script>
+                //Wait for other things to be loaded so the site doesn't wait on the search
+                $(document).ready(function() {
+                    //Go grab all the posts on the blog, but only the slug and title fields
+                    //That helps limit the amount of data sent and stored locally
+                    $.get(ghost.url.api('posts', {limit: "all", fields: "slug,title,url"})).done(function(data) {
+                        //add all the data returned to a variable
+                        var searchData = data.posts; 
+
+                        //New bloodhound to make it searchable
+                        var search = new Bloodhound({
+                          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+                          queryTokenizer: Bloodhound.tokenizers.whitespace,
+                          local: searchData
+                        });
+
+                        //Build the typeahead
+                        $('#site-search .typeahead').typeahead(null, {
+                              name: 'search',
+                              //source is the bloodhound variable
+                              source: search,
+                              templates: {
+                                empty: [
+                                    '<div class="empty-message">',
+                                    'unable to find any post that match the current query',
+                                    '</div>'
+                                ].join('\n'),
+                                suggestion: function(data) {
+                                    return '<p><strong><a href="../' + data.url + '">' + data.title + '</a></strong></p>';
+                                }
+                            }
+                        }); 
+
+                        //Now show the search bar since getting data was successful
+                        $('#site-search').show();
+                    }).fail(function() {
+                        //If the get request errors out, put an error in the console
+                        console.log("Error getting Ghost API Data");
+                    });
+                });
+            </script>
+        </article>
+    </div>
+</main>
+
+{{/post}}
+
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "scripts"}}
+<script>
+$(function() {
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+});
+</script>
+{{/contentFor}}
