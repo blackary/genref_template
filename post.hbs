@@ -23,6 +23,10 @@ into the {body} of the default.hbs template --}}
                     {{#primary_tag}}
                         <span class="date-divider">/</span> <a href="{{url}}">{{name}}</a>
                     {{/primary_tag}}
+                    <span class="date-divider">/</span>
+                    {{#author}}
+                        <a href="{{url}}">{{name}}</a>
+                    {{/author}}
                 </section>
                 <h1 class="post-full-title">{{title}}</h1>
             </header>
