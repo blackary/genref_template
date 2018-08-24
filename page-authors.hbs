@@ -16,7 +16,7 @@
 
     {{#get 'users' limit='all' filter="name:-['Gentle Reformation']" order='name'}}
       <div class="post-feed">
-        {#foreach users}}
+        {{#foreach users}}
           <article class="post-card {{#unless profile_image}} no-image{{/unless}}">
             {{#if profile_image}}
               <a class="post-card-image-link" href="{{url}}">
