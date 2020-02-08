@@ -1994,3 +1994,7 @@ Usage (In Ghost editor):
  .kg-gallery-image:not(:first-of-type) {
     margin: 0 0 0 0.75em;
 }
+
+.page-authors .post-card {
+    max-width: 30%;
+}
