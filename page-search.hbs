@@ -15,63 +15,71 @@ into the {body} of the default.hbs template --}}
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner search-page">
         <header class="post-full-header">
-            <h1>Search 2</h1>
-        </header>
-        <article class="post-full no-image">
-            <form>
-                <input id="search-field" />
-                <input type="submit" value="search">
-            </form>
-            <section id="results"></section>
-        </article>
-    
-        <header class="post-full-header">
             <h1>Search</h1>
         </header>
         <article class="post-full no-image">
-            <div id="site-search" style="display:none;"> <!--Hide this until getting data is successful-->
+            <div id="site-search" style="display:none;">
+                <!--Hide this until getting data is successful-->
                 <input class="typeahead" type="text" placeholder="Search">
             </div>
+            <input id="ghost-search-field">
+            <div id="ghost-search-results"></div>
             <script>
+                let ghostSearch = new GhostSearch({
+                    url: 'https://gentlereformation.ghost.io',
+                    key: '4988097ab12ee70a74a4eabdcc',
+                });
+            </script>
+
+            <script>
+                /*
                 //Wait for other things to be loaded so the site doesn't wait on the search
-                $(document).ready(function() {
+                $(document).ready(function () {
+                    const api = new GhostContentAPI({
+                        url: 'https://gentlereformation.ghost.io',
+                        key: '4988097ab12ee70a74a4eabdcc',
+                        version: "v3"
+                    });
                     //Go grab all the posts on the blog, but only the slug and title fields
                     //That helps limit the amount of data sent and stored locally
-                    $.get(ghost.url.api('posts', {limit: "all", fields: "slug,title,url"})).done(function(data) {
-                        //add all the data returned to a variable
-                        var searchData = data.posts; 
+                    api.posts.browse({ limit: "all", include: 'slug,title,url' })
+                        .then((posts) => {
+                            //add all the data returned to a variable
+                            var searchData = posts;
 
-                        //New bloodhound to make it searchable
-                        var search = new Bloodhound({
-                          datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
-                          queryTokenizer: Bloodhound.tokenizers.whitespace,
-                          local: searchData
-                        });
+                            //New bloodhound to make it searchable
+                            var search = new Bloodhound({
+                                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+                                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                                local: searchData
+                            });
 
-                        //Build the typeahead
-                        $('#site-search .typeahead').typeahead(null, {
-                              name: 'search',
-                              //source is the bloodhound variable
-                              source: search,
-                              templates: {
-                                empty: [
-                                    '<div class="empty-message">',
-                                    'unable to find any post that match the current query',
-                                    '</div>'
-                                ].join('\n'),
-                                suggestion: function(data) {
-                                    return '<p><strong><a href="../' + data.url + '">' + data.title + '</a></strong></p>';
+                            //Build the typeahead
+                            $('#site-search .typeahead').typeahead(null, {
+                                name: 'search',
+                                //source is the bloodhound variable
+                                source: search,
+                                templates: {
+                                    empty: [
+                                        '<div class="empty-message">',
+                                        'unable to find any post that match the current query',
+                                        '</div>'
+                                    ].join('\n'),
+                                    suggestion: function (data) {
+                                        return '<p><strong><a href="../' + data.url + '">' + data.title + '</a></strong></p>';
+                                    }
                                 }
-                            }
-                        }); 
+                            });
 
-                        //Now show the search bar since getting data was successful
-                        $('#site-search').show();
-                    }).fail(function() {
-                        //If the get request errors out, put an error in the console
-                        console.log("Error getting Ghost API Data");
-                    });
+                            //Now show the search bar since getting data was successful
+                            $('#site-search').show();
+                        })
+                        .catch((err) => {
+                            //If the get request errors out, put an error in the console
+                            console.log("Error getting Ghost API Data");
+                        });
                 });
+                */
             </script>
         </article>
     </div>
@@ -82,15 +90,10 @@ into the {body} of the default.hbs template --}}
 {{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
 {{#contentFor "scripts"}}
 <script>
-$(function() {
-    var $postContent = $(".post-full-content");
-    $postContent.fitVids();
-});
-</script>
-<script type="text/javascript" src="{{asset "ghostHunter/dist/jquery.ghosthunter.js"}}"></script>
-<script>
-    $("#search-field").ghostHunter({
-        results: "#results"
+    $(function () {
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
     });
+    <script src="https://cdn.jsdelivr.net/npm/ghost-search@1.0.1/dist/ghost-search.min.js"></script>
 </script>
 {{/contentFor}}
