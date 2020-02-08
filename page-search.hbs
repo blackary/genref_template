@@ -21,6 +21,26 @@ into the {body} of the default.hbs template --}}
             <input id=" ghost-search-field" style="height: 30px;width: 210px;" preview="" placeholder="Type to search">
             <div id="ghost-search-results"></div>
         </article>
+        <script>
+            $(document).ready(function () {
+                let ghostSearch = new GhostSearch({
+                    host: 'https://gentlereformation.ghost.io',
+                    key: '4988097ab12ee70a74a4eabdcc',
+                    template: result => '<a href="' + result.url + '" style="display: block;">' + result.title + '</a>',
+                    api: {
+                        resource: 'posts',
+                        parameters: {
+                            limit: 'all',
+                            fields: ['title', 'url'],
+                            filter: '',
+                            include: '',
+                            order: '',
+                            formats: '',
+                        },
+                    },
+                });
+            });
+        </script>
     </div>
 </main>
 
@@ -29,24 +49,4 @@ into the {body} of the default.hbs template --}}
 {{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
 {{#contentFor "scripts"}}
 <script src="https://cdn.jsdelivr.net/npm/ghost-search@1.0.1/dist/ghost-search.min.js"></script>
-<script>
-    $(document).ready(function () {
-        let ghostSearch = new GhostSearch({
-            host: 'https://gentlereformation.ghost.io',
-            key: '4988097ab12ee70a74a4eabdcc',
-            template: result => '<a href="' + result.url + '" style="display: block;">' + result.title + '</a>',
-            api: {
-                resource: 'posts',
-                parameters: {
-                    limit: 'all',
-                    fields: ['title', 'url'],
-                    filter: '',
-                    include: '',
-                    order: '',
-                    formats: '',
-                },
-            },
-        });
-    });
-</script>
 {{/contentFor}}
