@@ -17,80 +17,9 @@ into the {body} of the default.hbs template --}}
         <header class="post-full-header">
             <h1>Search</h1>
         </header>
-        <article class="post-full no-image">
-            <input id="ghost-search-field">
+        <article class="post-full no-image" style="text-align: center;">
+            <input id=" ghost-search-field" style="height: 30px;width: 210px;" preview="" placeholder="Type to search">
             <div id="ghost-search-results"></div>
-            <script>
-                $(document).ready(function () {
-                    let ghostSearch = new GhostSearch({
-                        host: 'https://gentlereformation.ghost.io',
-                        key: '4988097ab12ee70a74a4eabdcc',
-                        template: result => '<a href="' + result.url + '">' + result.title + '</a>',
-                        api: {
-                            resource: 'posts',
-                            parameters: {
-                                limit: 'all',
-                                fields: ['title', 'url'],
-                                filter: '',
-                                include: '',
-                                order: '',
-                                formats: '',
-                            },
-                        },
-                    });
-                });
-            </script>
-
-            <script>
-                /*
-                //Wait for other things to be loaded so the site doesn't wait on the search
-                $(document).ready(function () {
-                    const api = new GhostContentAPI({
-                        url: 'https://gentlereformation.ghost.io',
-                        key: '4988097ab12ee70a74a4eabdcc',
-                        version: "v3"
-                    });
-                    //Go grab all the posts on the blog, but only the slug and title fields
-                    //That helps limit the amount of data sent and stored locally
-                    api.posts.browse({ limit: "all", include: 'slug,title,url' })
-                        .then((posts) => {
-                            //add all the data returned to a variable
-                            var searchData = posts;
-
-                            //New bloodhound to make it searchable
-                            var search = new Bloodhound({
-                                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
-                                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                                local: searchData
-                            });
-
-                            //Build the typeahead
-                            $('#site-search .typeahead').typeahead(null, {
-                                name: 'search',
-                                //source is the bloodhound variable
-                                source: search,
-                                templates: {
-                                    empty: [
-                                        '<div class="empty-message">',
-                                        'unable to find any post that match the current query',
-                                        '</div>'
-                                    ].join('\n'),
-                                    suggestion: function (data) {
-                                        return '<p><strong><a href="../' + data.url + '">' + data.title + '</a></strong></p>';
-                                    }
-                                }
-                            });
-
-                            //Now show the search bar since getting data was successful
-                            $('#site-search').show();
-                        })
-                        .catch((err) => {
-                            //If the get request errors out, put an error in the console
-                            console.log("Error getting Ghost API Data");
-                        });
-                });
-                */
-            </script>
         </article>
     </div>
 </main>
@@ -100,4 +29,24 @@ into the {body} of the default.hbs template --}}
 {{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
 {{#contentFor "scripts"}}
 <script src="https://cdn.jsdelivr.net/npm/ghost-search@1.0.1/dist/ghost-search.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let ghostSearch = new GhostSearch({
+            host: 'https://gentlereformation.ghost.io',
+            key: '4988097ab12ee70a74a4eabdcc',
+            template: result => '<a href="' + result.url + '" style="display: block;">' + result.title + '</a>',
+            api: {
+                resource: 'posts',
+                parameters: {
+                    limit: 'all',
+                    fields: ['title', 'url'],
+                    filter: '',
+                    include: '',
+                    order: '',
+                    formats: '',
+                },
+            },
+        });
+    });
+</script>
 {{/contentFor}}
