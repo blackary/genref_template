@@ -2,7 +2,7 @@
     "name": "genref-casper",
     "description": "Customized version of Casper for Gentle Reformation",
     "demo": "https://demo.ghost.io",
-    "version": "2.2.3c",
+    "version": "2.2.4",
     "engines": {
         "ghost": ">=1.2.0"
     },

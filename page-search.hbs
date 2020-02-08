@@ -15,6 +15,17 @@ into the {body} of the default.hbs template --}}
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner search-page">
         <header class="post-full-header">
+            <h1>Search 2</h1>
+        </header>
+        <article class="post-full no-image">
+            <form>
+                <input id="search-field" />
+                <input type="submit" value="search">
+            </form>
+            <section id="results"></section>
+        </article>
+    
+        <header class="post-full-header">
             <h1>Search</h1>
         </header>
         <article class="post-full no-image">
@@ -75,5 +86,11 @@ $(function() {
     var $postContent = $(".post-full-content");
     $postContent.fitVids();
 });
+</script>
+<script type="text/javascript" src="{{asset "ghostHunter/dist/jquery.ghosthunter.js"}}"></script>
+<script>
+    $("#search-field").ghostHunter({
+        results: "#results"
+    });
 </script>
 {{/contentFor}}
