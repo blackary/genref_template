@@ -2,9 +2,10 @@
     "name": "genref-casper",
     "description": "Customized version of Casper for Gentle Reformation",
     "demo": "https://demo.ghost.io",
-    "version": "2.2.4",
+    "version": "2.2.4b",
     "engines": {
-        "ghost": ">=1.2.0"
+        "ghost": ">=1.2.0",
+        "ghost-api": "v3"
     },
     "license": "MIT",
     "screenshots": {
