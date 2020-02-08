@@ -18,16 +18,14 @@ into the {body} of the default.hbs template --}}
             <h1>Search</h1>
         </header>
         <article class="post-full no-image">
-            <div id="site-search" style="display:none;">
-                <!--Hide this until getting data is successful-->
-                <input class="typeahead" type="text" placeholder="Search">
-            </div>
             <input id="ghost-search-field">
             <div id="ghost-search-results"></div>
             <script>
-                let ghostSearch = new GhostSearch({
-                    url: 'https://gentlereformation.ghost.io',
-                    key: '4988097ab12ee70a74a4eabdcc',
+                $(document).ready(function () {
+                    let ghostSearch = new GhostSearch({
+                        host: 'https://gentlereformation.ghost.io',
+                        key: '4988097ab12ee70a74a4eabdcc',
+                    });
                 });
             </script>
 
