@@ -32,7 +32,7 @@ into the {body} of the default.hbs template --}}
                             'authors'
                         ],
                     },
-                    template: result => '<a href="' + result.url + '" style="display: block;">' + result.title + ' -- ' + result.authors[0] + '</a>',
+                    template: result => '<a href="' + result.url + '" style="display: block;">' + result.title + '</a>',
                     api: {
                         resource: 'posts',
                         parameters: {
