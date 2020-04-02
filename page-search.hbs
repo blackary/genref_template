@@ -26,12 +26,18 @@ into the {body} of the default.hbs template --}}
                 let ghostSearch = new GhostSearch({
                     host: 'https://gentlereformation.ghost.io',
                     key: '4988097ab12ee70a74a4eabdcc',
-                    template: result => '<a href="' + result.url + '" style="display: block;">' + result.title + '</a>',
+                    options: {
+                        keys: [
+                            'name',
+                            'authors'
+                        ],
+                    },
+                    template: result => '<a href="' + result.url + '" style="display: block;">' + result.title + ' -- ' + result.authors[0] + '</a>',
                     api: {
                         resource: 'posts',
                         parameters: {
                             limit: 'all',
-                            fields: ['title', 'url'],
+                            fields: ['title', 'url', 'authors'],
                             filter: '',
                             include: '',
                             order: '',
