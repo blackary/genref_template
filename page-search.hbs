@@ -18,7 +18,8 @@ into the {body} of the default.hbs template --}}
             <h1>Search</h1>
         </header>
         <article class="post-full no-image" style="text-align: center;">
-            <input id="ghost-search-field" style="height: 30px;width: 210px;" preview="" placeholder="Type to search">
+            <input id="ghost-search-field" style="height: 40px;width: 230px;font-size: 20px;padding-left: 5px;"
+                preview="" placeholder="Type to search">
             <div id="ghost-search-results"></div>
         </article>
         <script>
@@ -40,6 +41,7 @@ into the {body} of the default.hbs template --}}
                         },
                     },
                 });
+                $("#ghost-search-field").focus();
             });
         </script>
     </div>
