@@ -14,7 +14,7 @@
             <h1 class="post-full-title">{{title}}</h1>
         </header>
 
-        {{#get 'authors' limit='all' filter="name:-['Gentle Reformation']" order='name'}}
+        {{#get 'authors' limit='all' filter="name:-['Gentle Reformation','Jared Olivetti','Rachel D','Sharon Sampson']" order='name'}}
         <div class="post-feed">
             {{#foreach authors}}
             <article class="post-card {{#unless profile_image}} no-image{{/unless}}">
